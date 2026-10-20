@@ -117,6 +117,9 @@ needs a `## <version>` section here, or its build fails.
   and Enter choose and open its files, and a file whose conflicts still
   have the base's lines asks before it is marked resolved.
 
+- **Linux**: defer native menu replacement until after drawing, avoiding
+  destruction of menu widgets while GTK traverses them (#51).
+
 ## 0.11.4
 
 - Mayoi checks for a new version every hour, not once a day, and shows it
