@@ -170,7 +170,7 @@ func (a *app) view(c *ui.Context) {
 	}
 	a.dialogBuilt = false
 	a.windowKeys(c)
-	if inEditor := a.keyFocus == placeEditor; inEditor != a.cutInEditor {
+	if inEditor := a.keysPlace == placeEditor; inEditor != a.cutInEditor {
 		a.cutInEditor = inEditor
 		a.host.menuChanged()
 	}

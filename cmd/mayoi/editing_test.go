@@ -106,6 +106,37 @@ func TestCutCurrentLine(t *testing.T) {
 	}
 }
 
+// The Cut of the Edit menu is the editor's while the keys are in the
+// editor, and stays so as the window loses them to the menu's own grab: a
+// menu that changed then would be set anew, which closes one that is open.
+func TestCutMenuFollowsThePlaceOfTheKeys(t *testing.T) {
+	hs, d := editHarness(t, "cut-menu.txt", "one\ntwo")
+	hs.place(d, 1, 1)
+	hs.settle()
+	key := func() string { return menuKey(hs.a.menu(false, func(string, *mygo.Window) {}).Items()) }
+	menu := key()
+	if !hs.a.cutInEditor {
+		t.Fatal("the editor's Cut is not the menu's while the editor has the keys")
+	}
+	hs.tt.SetFocused(false)
+	hs.settle()
+	if !hs.a.cutInEditor || key() != menu {
+		t.Error("the menu changes as the window loses its keys, which closes an open one")
+	}
+	hs.tt.SetFocused(true)
+	hs.settle()
+	if !hs.a.cutInEditor || key() != menu {
+		t.Error("the menu changes as the window takes its keys again")
+	}
+	// The keys in a text field of the window's take the role's Cut, which
+	// cuts and pastes in the field as the desktop does.
+	hs.a.openFind(false)
+	hs.settle()
+	if hs.a.cutInEditor || key() == menu {
+		t.Error("the menu keeps the editor's Cut with the keys in the find field")
+	}
+}
+
 func TestCutKeepsSelectionAndReadOnlyBehavior(t *testing.T) {
 	for _, menu := range []bool{false, true} {
 		for _, tc := range []struct {

@@ -5,6 +5,10 @@ needs a `## <version>` section here, or its build fails.
 
 ## Unreleased
 
+- A menu of the menu bar stays open while it is clicked, after the editor
+  was clicked last: the Edit menu's Cut, which is the editor's while the
+  editor has the keys, no longer makes the menu bar anew as the menu takes
+  the keys from the window, which closed the menu as it opened.
 - **View → Theme → Light** lightens the window on a dark desktop again, and
   Dark darkens it on a light one: the window follows the appearance the
   settings choose, rather than what the desktop reports, which on Linux

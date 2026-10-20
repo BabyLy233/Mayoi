@@ -289,9 +289,15 @@ type app struct {
 	// strokes of a chord of them typed so far. keyFocus is the place the
 	// keyboard is in as the view was built, placeNone where the window
 	// takes their keys, and keyTerm the terminal that took a key last.
+	// keysPlace is the place they were in last, which stays where they
+	// were while the window has none, and cutInEditor whether that place
+	// is the editor: the menu's Cut follows it, as a menu that changed as
+	// the window lost its keys to the menu's own grab would close again
+	// under the pointer.
 	keys        *keymap.Map
 	chord       []keymap.Stroke
 	keyFocus    keyPlace
+	keysPlace   keyPlace
 	cutInEditor bool
 	keyTerm     *session
 	// held is the key the keymap took last, until it is let go of.

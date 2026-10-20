@@ -495,8 +495,11 @@ func (a *app) menu(cli bool, run func(id string, win *mygo.Window)) *mygo.Menu {
 		it.Disabled = len(a.review.notes) == 0
 		return it
 	}
+	// The editor's Cut cuts the caret's line when nothing is selected, which
+	// the role's does not: it is the menu's while the keys are in the
+	// editor, and the role's while they are in a text field of the window's.
 	cut := &mygo.MenuItem{Role: mygo.RoleCut}
-	if a.keyFocus == placeEditor {
+	if a.cutInEditor {
 		cut = item("edit.cut")
 	}
 	menus := []*mygo.MenuItem{

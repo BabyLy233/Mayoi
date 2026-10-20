@@ -37,7 +37,7 @@ const (
 // it has the keyboard, then fn the others, as its HandleInput.
 func (a *app) takeKeys(el ui.Element, where keyPlace, fn func(ev ui.InputEvent) bool) ui.Element {
 	if el.Focused() {
-		a.keyFocus = where
+		a.keyFocus, a.keysPlace = where, where
 	}
 	return el.HandleInput(func(ev ui.InputEvent) bool {
 		if ev.Kind == ui.InputKeyUp && a.held != nil && *a.held == ev.Key {
