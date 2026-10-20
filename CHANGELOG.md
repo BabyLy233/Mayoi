@@ -5,6 +5,11 @@ needs a `## <version>` section here, or its build fails.
 
 ## Unreleased
 
+- **View → Theme → Light** lightens the window on a dark desktop again, and
+  Dark darkens it on a light one: the window follows the appearance the
+  settings choose, rather than what the desktop reports, which on Linux
+  stayed dark under Light while the desktop preferred dark. System still
+  follows the desktop, and The Matrix stays dark.
 - Discarding changes block by block in a diff now always goes through the
   file's document, also when the file was not open: the discard is one
   step of undo, the tab shows the file as changed until it is saved, and
