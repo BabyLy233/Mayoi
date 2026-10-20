@@ -5,6 +5,10 @@ needs a `## <version>` section here, or its build fails.
 
 ## Unreleased
 
+- A menu of the menu bar stays open while it is clicked, after the editor
+  was clicked last: the Edit menu's Cut, which is the editor's while the
+  editor has the keys, no longer makes the menu bar anew as the menu takes
+  the keys from the window, which closed the menu as it opened.
 - Discarding changes block by block in a diff now always goes through the
   file's document, also when the file was not open: the discard is one
   step of undo, the tab shows the file as changed until it is saved, and
