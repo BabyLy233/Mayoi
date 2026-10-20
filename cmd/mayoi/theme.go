@@ -721,11 +721,25 @@ func contrast(x, y ui.Color) float64 {
 	return max(a, b) / min(a, b)
 }
 
+// windowDark is whether the window is dark: the Light or Dark of the
+// settings, or the system's where the appearance is "". The settings
+// decide even where the desktop disagrees, as a dark desktop under Light,
+// which reports a dark appearance however the window was made light.
+func (a *app) windowDark(system bool) bool {
+	switch a.settings.Appearance {
+	case "light":
+		return false
+	case "dark":
+		return true
+	}
+	return system
+}
+
 // applyTheme sets the window's theme from the palette of its theme,
 // and returns that palette.
 func (a *app) applyTheme(c *ui.Context) *palette {
 	t := *c.Theme()
-	p := paletteFor(a.settings.Theme, t.Dark)
+	p := paletteFor(a.settings.Theme, a.windowDark(t.Dark))
 	t.Dark = p.dark
 	t.Background = p.editor
 	// Every state of the accent, or a hovered button would turn the

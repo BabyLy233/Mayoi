@@ -168,6 +168,40 @@ func TestLightOrDarkThemes(t *testing.T) {
 	}
 }
 
+// The appearance of the settings decides the window's light or dark, as a
+// desktop whose own disagrees, a dark one under Light, would leave the
+// window dark otherwise: the desktop is asked again, and says so still.
+func TestAppearanceOverridesTheDesktop(t *testing.T) {
+	hs := newHarness(t, true)
+	a := hs.a
+	if a.pal != darkPal {
+		t.Fatal("a dark desktop does not show a dark window")
+	}
+	a.setAppearance("light")
+	hs.settle()
+	if a.pal != lightPal || a.termTheme != "" {
+		t.Error("Light does not lighten a dark desktop")
+	}
+	a.setAppearance("dark")
+	hs.settle()
+	if a.pal != darkPal {
+		t.Error("Dark does not darken the window")
+	}
+	a.setAppearance("")
+	hs.settle()
+	if a.pal != darkPal {
+		t.Error("the system's appearance is not followed again")
+	}
+	// The appearance is not of The Matrix, which is always dark.
+	a.setTheme(themeMatrix)
+	hs.settle()
+	a.setAppearance("light")
+	hs.settle()
+	if a.pal != matrixPal {
+		t.Error("The Matrix is not dark under Light")
+	}
+}
+
 // A character blinks for a moment, bobs once in a few periods, and hops
 // while there is work, the hop changing every step.
 func TestMascotPoses(t *testing.T) {
