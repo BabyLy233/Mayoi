@@ -6,6 +6,10 @@ needs a `## <version>` section here, or its build fails.
 ## Unreleased
 
 - When an update check fails, the update window shows the whole error, with no tooltip over it.
+- The panes of a merge wrap long lines when **Word Wrap** is on, and `⌥Z` toggles wrapping for that merge tab.
+- Conflict marks, gutter buttons and synced scrolling in a merge follow wrapped rows.
+- A conflict taller than its pane keeps its gutter buttons in view while any of it shows.
+- A sideways swipe or `Shift`+wheel scrolls the result pane of a merge, as it does the side panes.
 
 ## 0.13.0
 
