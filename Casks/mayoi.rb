@@ -1,11 +1,11 @@
 cask "mayoi" do
   arch arm: "arm64", intel: "amd64"
 
-  version "0.12.2"
-  sha256 arm:   "b9a14320f53fcae052188030febc2717e5eaedbbba988d4023ce2bb7923d20ec",
-         intel: "9bc4e051fb44cc560d3f20a90e10c161ec8c5fbf0632977cefd71546ea204743"
+  version "0.13.1"
+  sha256 arm:   "c249f8648ed816a3c0c6d48e00ee9c0a83139508babbf2fbb92039588193d0a4",
+         intel: "81fd5cec6855b161c9049c5af84bfd5067e638abd62d10d98addd0457955120c"
 
-  url "https://github.com/sorrycc/Mayoi/releases/download/v#{version}/Mayoi.#{version}.#{arch}.dmg"
+  url "https://github.com/sorrycc/Mayoi/releases/download/v#{version}/mayoi-#{version}-#{arch}.dmg"
   name "Mayoi"
   desc "Small, fast code editor"
   homepage "https://github.com/sorrycc/Mayoi"

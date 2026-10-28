@@ -11,9 +11,9 @@ tmp="$(mktemp -d)"
 trap 'rm -rf "$tmp"' EXIT HUP INT TERM
 
 gh release download "v$version" --repo sorrycc/Mayoi --dir "$tmp" \
-  --pattern "Mayoi.$version.arm64.dmg" --pattern "Mayoi.$version.amd64.dmg"
-arm="$(shasum -a 256 "$tmp/Mayoi.$version.arm64.dmg" | cut -d ' ' -f 1)"
-intel="$(shasum -a 256 "$tmp/Mayoi.$version.amd64.dmg" | cut -d ' ' -f 1)"
+  --pattern "mayoi-$version-arm64.dmg" --pattern "mayoi-$version-amd64.dmg"
+arm="$(shasum -a 256 "$tmp/mayoi-$version-arm64.dmg" | cut -d ' ' -f 1)"
+intel="$(shasum -a 256 "$tmp/mayoi-$version-amd64.dmg" | cut -d ' ' -f 1)"
 
 # Keep the committed cask as the template, preserving unrelated edits.
 awk -v version="$version" -v arm="$arm" -v intel="$intel" '
