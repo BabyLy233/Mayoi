@@ -147,8 +147,13 @@ type editor struct {
 	sel       [2]int // the selection in the last frame
 	caretSeen bool
 	// pending is a selection the app asked for, which the next frame
-	// makes, scrolling the editor to it.
+	// makes, scrolling the editor to it, nearer its top when center is
+	// set (selectRange).
 	pending *[2]int
+	center  bool
+	// areaInput is whether the text area took input since the frame read
+	// its selection, which may have moved it.
+	areaInput bool
 	// version is the version of the text the editor showed last.
 	version uint64
 	// resync has the next frame give the text area the selection, which
@@ -386,7 +391,7 @@ func columns(s string) int {
 // scrolls the editor to show them, nearer its top than its bottom when
 // center is set or they are out of view.
 func (d *editor) selectRange(start, end int, center bool) {
-	d.pending = &[2]int{start, end}
+	d.pending, d.center = &[2]int{start, end}, center
 }
 
 // landFor is how long the line a jump lands on stays lit.

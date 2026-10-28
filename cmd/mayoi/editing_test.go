@@ -573,3 +573,45 @@ func TestSwipeSidewaysAlongItsAxis(t *testing.T) {
 		t.Fatal("did not scroll down")
 	}
 }
+
+// The app's edits, undo and redo among them, scroll as little as it
+// takes: a caret on the last line in view leaves the view where it is,
+// and with Word Wrap on too, as the area guesses the heights of the rows
+// above again.
+func TestEditsKeepTheView(t *testing.T) {
+	for _, wrap := range []bool{false, true} {
+		hs, d := editHarness(t, "w.go", wrapFile(400))
+		a := hs.a
+		a.settings.WordWrap = wrap
+		hs.settle()
+		top := func() (int, float32) {
+			g := a.geometry(d, d.buf.Snapshot().LineCount())
+			i := g.at(d.vscroll.Y - editorPadY)
+			return i, editorPadY + g.top(i) - d.vscroll.Y
+		}
+		// The caret on the last line wholly in view, and in the middle.
+		for _, below := range []float32{a.font.lineH + editorPadY, d.vim.viewH / 2} {
+			at := 150
+			s, _ := d.buf.Snapshot().LineRange(at)
+			hs.place(d, s, s)
+			g := a.geometry(d, d.buf.Snapshot().LineCount())
+			d.vscroll.Y = editorPadY + g.top(at) + below - d.vim.viewH
+			hs.settle()
+			last := below < d.vim.viewH/2
+			line0, y0 := top()
+			hs.tt.SetClipboard("x := 1\ny := 2\n")
+			for _, k := range []struct {
+				mods ui.Modifiers
+				key  ui.Key
+			}{{0, ui.KeyTab}, {ui.Cmd, ui.KeyZ}, {ui.Cmd, ui.KeyV}, {ui.Cmd, ui.KeyZ}, {ui.Cmd | ui.Shift, ui.KeyZ}, {ui.Cmd, ui.KeyZ}} {
+				if last && k.key == ui.KeyV {
+					break // pasted lines push the caret out of view
+				}
+				hs.key(k.mods, k.key)
+				if line, y := top(); line != line0 || y != y0 {
+					t.Fatalf("wrap %v, line %d, %v %v: line %d at %v at the top, was %d at %v", wrap, at, k.mods, k.key, line, y, line0, y0)
+				}
+			}
+		}
+	}
+}

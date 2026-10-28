@@ -10,6 +10,9 @@ needs a `## <version>` section here, or its build fails.
 - Conflict marks, gutter buttons and synced scrolling in a merge follow wrapped rows.
 - A conflict taller than its pane keeps its gutter buttons in view while any of it shows.
 - A sideways swipe or `Shift`+wheel scrolls the result pane of a merge, as it does the side panes.
+- `⌘Z`, `⇧⌘Z`, `⌘X`, `Tab` and `Enter` show their edit at once, without the line highlight flickering.
+- Undo and other edits no longer recenter the view when the caret is near its bottom edge.
+- With **Word Wrap** on, undo and redo keep the editor where it is scrolled instead of jumping.
 
 ## 0.13.0
 
