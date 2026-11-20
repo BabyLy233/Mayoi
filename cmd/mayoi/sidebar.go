@@ -452,17 +452,16 @@ func (a *app) fileTree(c *ui.Context) {
 		})
 		row.Children(func() {
 			ignored := a.isIgnored(path)
-			icon, col := iconFolder, p.accent
-			switch {
-			case isDir && a.files.Open.Has(path):
-				icon = iconFolderOpen
-			case !isDir:
-				icon, col = fileIcon(p, name)
+			var paint fileIconPaint
+			if isDir {
+				paint = a.folderIcon(filepath.Base(path), a.files.Open.Has(path))
+			} else {
+				paint = a.fileIcon(name)
 			}
+			icon := paint.element(c, 14)
 			if ignored {
-				col = col.Alpha(0.5)
+				icon.Opacity(0.5)
 			}
-			ui.Icon(c, icon).FontSize(14).TextColor(col)
 			label := ui.Text(c, name).FontSize(13).SingleLine().Shrink(1).TextColor(p.text)
 			// What Git has of the file: its letter, or a dot by a folder
 			// that has changes.

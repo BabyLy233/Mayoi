@@ -255,6 +255,7 @@ What a plugin declares, Mayoi shows without running it:
 | `previews`      | a preview beside the source for files matching a glob, as Markdown, SVG and Mermaid have           | 2     |
 | `webviews`      | a panel in a tab or the sidebar                                                                     | 2     |
 | `themes`        | the theme picker and `view.theme.*` commands, from palette JSON                                    | 3     |
+| `fileIconThemes` | every list of files, from VS Code's file icon theme JSON: the Explorer, tabs, Quick Open and more | 3     |
 | `languages`     | file associations, comment tokens, brackets, indentation, the Chroma lexer                         | 3     |
 | `snippets`      | VS Code's snippet format, per language                                                              | 3     |
 | `languageServers` | the LSP client: a command to start and the languages it serves                                  | 5     |

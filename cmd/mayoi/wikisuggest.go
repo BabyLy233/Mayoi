@@ -921,14 +921,14 @@ func (a *app) wikiRow(c *ui.Context, d *editor, i int, it wikiItem) {
 	}
 	row.Children(func() {
 		a.pickMark(c, sel)
-		icon, col := iconHash, p.muted
+		paint := fileIconPaint{svg: iconHash, color: p.muted}
 		switch it.mode {
 		case wikiFilesMode:
-			icon, col = fileIcon(p, it.name)
+			paint = a.fileIcon(it.name)
 		case wikiBlocksMode:
-			icon = iconQuote
+			paint = fileIconPaint{svg: iconQuote, color: p.muted}
 		}
-		ui.Icon(c, icon).FontSize(14).TextColor(col)
+		paint.element(c, 14)
 		ui.RichText(c, a.matchSpans(it.title, 0, it.positions, p.text)...).FontSize(13).SingleLine().Shrink(1)
 		if it.detail != "" {
 			ui.Spacer(c)

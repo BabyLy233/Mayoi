@@ -883,8 +883,7 @@ func (a *app) paintFileHeader(pt *ui.Painter, f *diffFile, r ui.Rect, hovered bo
 	pt.Icon(chevron, ui.Rect{X: x, Y: mid - 6, W: 12, H: 12}, p.muted)
 	x += 18
 	name := filepath.Base(f.path)
-	icon, iconCol := entryIcon(p, f.entry, name)
-	pt.Icon(icon, ui.Rect{X: x, Y: mid - 7, W: 14, H: 14}, iconCol)
+	a.entryIcon(p, f.entry, name).paint(pt, ui.Rect{X: x, Y: mid - 7, W: 14, H: 14})
 	x += 20
 	rel := a.relOrPath(f.path)
 	dir := ""

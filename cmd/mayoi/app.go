@@ -368,8 +368,14 @@ type app struct {
 	recents    recentPicker      // the box of the recent folders
 	pluginPick pluginPicker      // the box of a plugin's window.pick
 	themes     themePicker       // the box of the color themes
-	remotePick remotePicker      // the box that connects to a host
-	conflicts  conflictsList     // the box of the files in conflict
+	icons      iconPicker        // the box of the file icon themes
+	// iconThemeID, iconThemeGen and iconThemeLoaded are the file icon
+	// theme this window last looked up, and the plugins' generation then.
+	iconThemeID     string
+	iconThemeGen    uint64
+	iconThemeLoaded *loadedIconTheme
+	remotePick      remotePicker  // the box that connects to a host
+	conflicts       conflictsList // the box of the files in conflict
 	// pluginSeen is what the plugins were last told of the documents:
 	// each one's version, and the editor in front.
 	pluginSeen pluginSeen

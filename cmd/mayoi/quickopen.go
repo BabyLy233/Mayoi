@@ -327,8 +327,7 @@ func (a *app) quickFooter(c *ui.Context, isLine bool, open, tip string, prefixes
 func (a *app) quickRow(c *ui.Context, rel string, positions []int) {
 	p := a.pal
 	base := strings.LastIndexByte(rel, '/') + 1
-	icon, col := fileIcon(p, rel[base:])
-	ui.Icon(c, icon).FontSize(15).TextColor(col)
+	a.fileIcon(rel[base:]).element(c, 15)
 	ui.RichText(c, a.matchSpans(rel[base:], base, positions, p.text)...).FontSize(13).SingleLine().Shrink(0)
 	if dir := path.Dir(rel); dir != "." {
 		ui.RichText(c, a.matchSpans(dir, 0, positions, p.faint)...).FontSize(12).SingleLine().Shrink(1)

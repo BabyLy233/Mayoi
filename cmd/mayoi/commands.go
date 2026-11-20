@@ -267,6 +267,7 @@ func (a *app) commandsIn(t locales.Messages) []command {
 		{"view.appearance.light", t.CmdViewAppearanceLight(), "", func() { a.setAppearance("light") }},
 		{"view.appearance.dark", t.CmdViewAppearanceDark(), "", func() { a.setAppearance("dark") }},
 		{"view.selectTheme", t.CmdViewSelectTheme(), "", a.openThemePicker},
+		{"view.selectFileIcons", t.CmdViewSelectFileIcons(), "", a.openIconPicker},
 		{"view.theme.mayoi", "Mayoi", "", func() { a.setTheme("") }},
 		{"view.theme.matrix", t.CmdViewThemeMatrix(), "", func() { a.setTheme(themeMatrix) }},
 		{"view.theme.claude", "Claude", "", func() { a.setTheme(themeClaude) }},
@@ -745,7 +746,7 @@ func (a *app) menu(cli bool, run func(id string, win *mygo.Window)) *mygo.Menu {
 			}}, mygo.Separator(),
 			item("view.zoomIn"), item("view.zoomOut"), item("view.zoomReset"), mygo.Separator(),
 			{Label: locales.MenuTheme(), Submenu: []*mygo.MenuItem{
-				item("view.selectTheme"), mygo.Separator(),
+				item("view.selectTheme"), item("view.selectFileIcons"), mygo.Separator(),
 				appearance("view.appearance.system", ""), appearance("view.appearance.light", "light"), appearance("view.appearance.dark", "dark"),
 				mygo.Separator(), theme("view.theme.mayoi", ""), theme("view.theme.matrix", themeMatrix), theme("view.theme.claude", themeClaude),
 				theme("view.theme.qoder", themeQoder), theme("view.theme.grokbot", themeGrokBot), theme("view.theme.cursor", themeCursor),

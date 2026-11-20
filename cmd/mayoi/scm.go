@@ -1058,8 +1058,8 @@ func (a *gitContext) scmFile(c *ui.Context, r scmRow, action *func()) {
 	}
 	row.Children(func() {
 		name := filepath.Base(e.Path)
-		icon, col := entryIcon(p, e, name)
-		ui.Icon(c, icon).FontSize(14).TextColor(col)
+		icon := a.app.entryIcon(p, e, name)
+		icon.element(c, 14)
 		label := ui.Text(c, name).FontSize(13).SingleLine().Shrink(0).TextColor(gitColor(p, letter))
 		if letter == 'D' {
 			label.Strikethrough()
@@ -1945,11 +1945,11 @@ func openLabel(e git.Entry) string {
 }
 
 // entryIcon is the icon of a changed file, or of a submodule.
-func entryIcon(p *palette, e git.Entry, name string) (*ui.SVG, ui.Color) {
+func (a *app) entryIcon(p *palette, e git.Entry, name string) fileIconPaint {
 	if e.Submodule() {
-		return iconFolder, p.accent
+		return fileIconPaint{svg: iconFolder, color: p.accent}
 	}
-	return fileIcon(p, name)
+	return a.fileIcon(name)
 }
 
 // scmActionEntries returns the chosen files on the same side of the index

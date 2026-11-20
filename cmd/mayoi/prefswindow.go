@@ -833,6 +833,10 @@ func (w *prefsWindow) control(c *ui.Context, f settings.Field, raw json.RawMessa
 	case settings.KindText:
 		var v string
 		json.Unmarshal(raw, &v)
+		if f.Key == "fileIconTheme" {
+			w.fileIconThemeChoice(c, v, apply)
+			return
+		}
 		buf := w.textBuffer(f.Key, v)
 		if prefFonts[f.Key] {
 			w.fontPicker(c, f, v, buf, apply)

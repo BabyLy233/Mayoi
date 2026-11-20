@@ -1,7 +1,8 @@
 # Plugins
 
-Plugins add commands, react to the editor, check and format code, draw views and previews, and bring themes, languages,
-snippets and language servers. They are folders of JavaScript or TypeScript that Mayoi runs in its own engine,
+Plugins add commands, react to the editor, check and format code, draw views and previews, and bring themes, file icons,
+languages, snippets and language servers.
+They are folders of JavaScript or TypeScript that Mayoi runs in its own engine,
 [moejs](https://github.com/MoeForge/moejs): no Node, no build step, and no webview unless a plugin asks for one.
 
 The API is new and may still change before 1.0. A plugin says which versions of Mayoi it works with in `mayoi`.
@@ -171,6 +172,7 @@ languages plugins declare.
 | `formatters`      | Formatters of `languages`, for **Format Document** and `formatOnSave`                          |
 | `webviews`        | Panels of HTML from the plugin's folder, in the sidebar                                        |
 | `themes`          | Themes, in Mayoi's format or VS Code's                                                         |
+| `fileIconThemes`  | File icons, in VS Code's file icon theme format, for the Explorer and the other lists of files |
 | `languages`       | File `extensions` and `filenames`, the Chroma `lexer` that highlights them, and `lineComment`  |
 | `snippets`        | Snippets in VS Code's format, for a `language` or `*`                                          |
 | `terminalLinks`   | A `pattern` of links clicked in a terminal (URLs and paths), which runs `command` with the match |
@@ -377,6 +379,35 @@ A theme file is Mayoi's format, the colors of one of Mayoi's palettes changed:
 or a VS Code color theme as it is, whose `colors` and `tokenColors` Mayoi maps to its own. `base` is `dark`, `light`
 or a theme's id, as `claude`. The theme shows in **View → Theme → Color Theme…**, the settings window, and the command
 palette.
+
+### File icon themes
+
+```jsonc
+"fileIconThemes": [{ "id": "material.icons", "label": "Material Icon Theme", "path": "icons.json" }]
+```
+
+The file is VS Code's file icon theme format, the SVG of `iconDefinitions` and the `fileNames`, `fileExtensions`,
+`folderNames`, `folderNamesExpanded`, `folder`, `folderExpanded` and `light` maps it uses. A theme of SVG icons works
+as it is; `fontCharacter` icons are not drawn, and a file or folder the theme leaves out keeps Mayoi's icon.
+
+```jsonc
+{
+  "iconDefinitions": {
+    "_file": { "iconPath": "./icons/file.svg" },
+    "_go":   { "iconPath": "./icons/go.svg" }
+  },
+  "file": "_file",
+  "fileExtensions": { "go": "_go" },
+  "light": { "file": "_file_light" }
+}
+```
+
+**View → Theme → File Icon Theme…** opens a searchable box of the themes, and the Appearance page of the settings
+window chooses the same setting. It is `fileIconTheme` in settings.json, `""` for Mayoi's icons, or a theme's id as
+`material.icons`. The Explorer, tabs, Quick Open, search, Source Control and breadcrumbs draw it. Icons carry their own
+colors where the SVGs do, and are drawn in the text color where they use `currentColor`.
+
+A plugin of icons alone needs no `main`, so Mayoi starts no JavaScript for it.
 
 ### Languages and snippets
 

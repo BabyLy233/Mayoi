@@ -320,8 +320,8 @@ func (a *app) diffRelPath(v *diffView, path string) string {
 func (a *app) commitFileLabel(c *ui.Context, e git.Entry, tree bool, rel string) {
 	p := a.pal
 	name := filepath.Base(e.Path)
-	icon, col := entryIcon(p, e, name)
-	ui.Icon(c, icon).FontSize(14).TextColor(col).Shrink(0)
+	icon := a.entryIcon(p, e, name)
+	icon.element(c, 14).Shrink(0)
 	label := ui.Text(c, name).FontSize(13).SingleLine().Shrink(0).TextColor(gitColor(p, e.X))
 	if e.X == 'D' {
 		label.Strikethrough()

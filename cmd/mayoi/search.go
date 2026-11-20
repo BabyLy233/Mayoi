@@ -1111,8 +1111,7 @@ func (a *app) searchHeader(c *ui.Context, f *searchFile, action *func()) {
 	row.Children(func() {
 		chevron(c, !s.collapsed[f.rel]).FontSize(12).TextColor(p.muted)
 		name := filepath.Base(f.path)
-		fi, col := fileIcon(p, name)
-		ui.Icon(c, fi).FontSize(14).TextColor(col)
+		a.fileIcon(name).element(c, 14)
 		ui.Text(c, name).FontSize(13).TextColor(p.text).SingleLine().Shrink(0)
 		if dir := filepath.ToSlash(filepath.Dir(f.rel)); dir != "." {
 			ui.Text(c, dir).FontSize(11.5).TextColor(p.faint).SingleLine().Shrink(1)

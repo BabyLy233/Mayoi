@@ -139,25 +139,25 @@ func (a *app) tabStrip(c *ui.Context, col *column) {
 								l.Draw(func(pt *ui.Painter, r ui.Rect) { drawGilt(pt, r, p) })
 							}
 						}
-						icon, tint := iconTerminal, p.muted
+						paint := fileIconPaint{svg: iconTerminal, color: p.muted}
 						switch {
 						case t.diff != nil && t.diff.commit != nil && t.diff.commit.pr != nil:
-							icon, tint = iconPullRequest, p.accent
+							paint = fileIconPaint{svg: iconPullRequest, color: p.accent}
 						case t.diff != nil && t.diff.commit != nil:
-							icon, tint = iconCommit, p.accent
+							paint = fileIconPaint{svg: iconCommit, color: p.accent}
 						case t.diff != nil:
-							icon, tint = iconDiff, p.changed
+							paint = fileIconPaint{svg: iconDiff, color: p.changed}
 						case t.tool != nil:
-							icon, tint = t.tool.icon(), p.accent
+							paint = fileIconPaint{svg: t.tool.icon(), color: p.accent}
 						case t.issue != nil:
-							icon, tint = t.issue.icon(), p.addedFg
+							paint = fileIconPaint{svg: t.issue.icon(), color: p.addedFg}
 						case t.term == nil:
-							icon, tint = fileIcon(p, t.name())
+							paint = a.fileIcon(t.name())
 						}
 						if t.term != nil {
-							a.termIcon(c, t.term, 14, tint, under)
+							a.termIcon(c, t.term, 14, paint.color, under)
 						} else {
-							ui.Icon(c, icon).FontSize(14).TextColor(tint)
+							paint.element(c, 14)
 						}
 						name := ui.Text(c, t.name()).FontSize(12.5).SingleLine().MaxWidth(220)
 						if t.transient {

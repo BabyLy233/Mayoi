@@ -273,14 +273,13 @@ func (a *app) crumbsTree(c *ui.Context, kids []string) {
 			clicked = path
 		}
 		row.Children(func() {
-			icon, col := iconFolder, p.accent
-			switch {
-			case isDir && k.tree.Open.Has(path):
-				icon = iconFolderOpen
-			case !isDir:
-				icon, col = fileIcon(p, name)
+			var paint fileIconPaint
+			if isDir {
+				paint = a.folderIcon(name, k.tree.Open.Has(path))
+			} else {
+				paint = a.fileIcon(name)
 			}
-			ui.Icon(c, icon).FontSize(14).TextColor(col)
+			paint.element(c, 14)
 			label := ui.Text(c, name).FontSize(13).SingleLine().Shrink(1).TextColor(p.text)
 			if path == k.file {
 				label.FontWeight(600)

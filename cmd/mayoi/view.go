@@ -185,6 +185,7 @@ func (a *app) view(c *ui.Context) {
 	a.pluginPickerView(c)
 	a.hoverView(c)
 	a.themePickerView(c)
+	a.iconPickerView(c)
 	a.remotePickerView(c)
 	a.conflictsView(c)
 	a.diagramOverlayView(c)
@@ -944,16 +945,16 @@ func (a *app) breadcrumbs(c *ui.Context, col *column, t *colTab) {
 		for i, part := range parts {
 			last := i == len(parts)-1
 			if last {
-				icon, col := fileIcon(p, part.name)
+				paint := a.fileIcon(part.name)
 				switch {
 				case t.diff != nil && t.diff.commit != nil && t.diff.commit.pr != nil:
-					icon, col = iconPullRequest, p.accent
+					paint = fileIconPaint{svg: iconPullRequest, color: p.accent}
 				case t.diff != nil && t.diff.commit != nil:
-					icon, col = iconCommit, p.accent
+					paint = fileIconPaint{svg: iconCommit, color: p.accent}
 				case t.diff != nil:
-					icon, col = iconDiff, p.changed
+					paint = fileIconPaint{svg: iconDiff, color: p.changed}
 				}
-				ui.Icon(c, icon).FontSize(13).TextColor(col)
+				paint.element(c, 13)
 			}
 			if part.dir != "" && t.diff == nil {
 				// A folder: its files in a box below it.

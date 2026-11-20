@@ -614,6 +614,16 @@ func (msgs Messages) CmdViewSelectTheme() string {
 	return Catalog.Format(msgs.locale, "cmdViewSelectTheme", nil)
 }
 
+// CmdViewSelectFileIcons says "File Icon Theme…"
+// in the language the app shows.
+func CmdViewSelectFileIcons() string { return In(i18n.Locale()).CmdViewSelectFileIcons() }
+
+// CmdViewSelectFileIcons says "File Icon Theme…"
+// in the language of msgs.
+func (msgs Messages) CmdViewSelectFileIcons() string {
+	return Catalog.Format(msgs.locale, "cmdViewSelectFileIcons", nil)
+}
+
 // ScmStashes says "Stashes"
 // in the language the app shows.
 func ScmStashes() string { return In(i18n.Locale()).ScmStashes() }
@@ -14934,6 +14944,26 @@ func (msgs Messages) PrefDescTheme() string {
 	return Catalog.Format(msgs.locale, "prefDescTheme", nil)
 }
 
+// PrefTitleFileIconTheme says "File Icon Theme"
+// in the language the app shows.
+func PrefTitleFileIconTheme() string { return In(i18n.Locale()).PrefTitleFileIconTheme() }
+
+// PrefTitleFileIconTheme says "File Icon Theme"
+// in the language of msgs.
+func (msgs Messages) PrefTitleFileIconTheme() string {
+	return Catalog.Format(msgs.locale, "prefTitleFileIconTheme", nil)
+}
+
+// PrefDescFileIconTheme says "The icons of files and folders."
+// in the language the app shows.
+func PrefDescFileIconTheme() string { return In(i18n.Locale()).PrefDescFileIconTheme() }
+
+// PrefDescFileIconTheme says "The icons of files and folders."
+// in the language of msgs.
+func (msgs Messages) PrefDescFileIconTheme() string {
+	return Catalog.Format(msgs.locale, "prefDescFileIconTheme", nil)
+}
+
 // PrefTitleAppearance says "Appearance"
 // in the language the app shows.
 func PrefTitleAppearance() string { return In(i18n.Locale()).PrefTitleAppearance() }
@@ -17790,6 +17820,56 @@ func ThemeAboutPlugin(plugin string) string { return In(i18n.Locale()).ThemeAbou
 // in the language of msgs.
 func (msgs Messages) ThemeAboutPlugin(plugin string) string {
 	return Catalog.Format(msgs.locale, "themeAboutPlugin", map[string]any{"plugin": plugin})
+}
+
+// FileIconThemeDefault says "Mayoi Icons"
+// in the language the app shows.
+func FileIconThemeDefault() string { return In(i18n.Locale()).FileIconThemeDefault() }
+
+// FileIconThemeDefault says "Mayoi Icons"
+// in the language of msgs.
+func (msgs Messages) FileIconThemeDefault() string {
+	return Catalog.Format(msgs.locale, "fileIconThemeDefault", nil)
+}
+
+// FileIconThemeMayoiAbout says "Mayoi's own icons"
+// in the language the app shows.
+func FileIconThemeMayoiAbout() string { return In(i18n.Locale()).FileIconThemeMayoiAbout() }
+
+// FileIconThemeMayoiAbout says "Mayoi's own icons"
+// in the language of msgs.
+func (msgs Messages) FileIconThemeMayoiAbout() string {
+	return Catalog.Format(msgs.locale, "fileIconThemeMayoiAbout", nil)
+}
+
+// FileIconThemePlaceholder says "Search file icon themes"
+// in the language the app shows.
+func FileIconThemePlaceholder() string { return In(i18n.Locale()).FileIconThemePlaceholder() }
+
+// FileIconThemePlaceholder says "Search file icon themes"
+// in the language of msgs.
+func (msgs Messages) FileIconThemePlaceholder() string {
+	return Catalog.Format(msgs.locale, "fileIconThemePlaceholder", nil)
+}
+
+// FileIconThemeNoMatches says "No file icon theme matches."
+// in the language the app shows.
+func FileIconThemeNoMatches() string { return In(i18n.Locale()).FileIconThemeNoMatches() }
+
+// FileIconThemeNoMatches says "No file icon theme matches."
+// in the language of msgs.
+func (msgs Messages) FileIconThemeNoMatches() string {
+	return Catalog.Format(msgs.locale, "fileIconThemeNoMatches", nil)
+}
+
+// FileIconThemeFailed says "Could not read the file icon theme {id}. See Plugins → Show Plugin Log."
+// in the language the app shows.
+func FileIconThemeFailed(id string) string { return In(i18n.Locale()).FileIconThemeFailed(id) }
+
+// FileIconThemeFailed says "Could not read the file icon theme {id}. See Plugins → Show Plugin Log."
+// in the language of msgs.
+func (msgs Messages) FileIconThemeFailed(id string) string {
+	return Catalog.Format(msgs.locale, "fileIconThemeFailed", map[string]any{"id": id})
 }
 
 // CmdSelInsertSnippet says "Insert Snippet…"

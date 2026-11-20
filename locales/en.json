@@ -57,6 +57,7 @@
   "busyCreatingWorktree": "Creating worktree {name}…",
   "cmdGitSwitchWorktree": "Switch Worktree…",
   "cmdViewSelectTheme": "Color Theme…",
+  "cmdViewSelectFileIcons": "File Icon Theme…",
   "@diffSummary": {
     "placeholders": {
       "files": {},
@@ -1704,6 +1705,8 @@
   "prefSectionShortcuts": "Keyboard Shortcuts",
   "prefTitleTheme": "Theme",
   "prefDescTheme": "The colors of every window. The Matrix, Purple Gold and the Halloween themes are always dark.",
+  "prefTitleFileIconTheme": "File Icon Theme",
+  "prefDescFileIconTheme": "The icons of files and folders.",
   "prefTitleAppearance": "Appearance",
   "prefDescAppearance": "Light or dark, or as the system is.",
   "prefTitleZoomLevel": "Window Zoom",
@@ -1988,6 +1991,11 @@
   "prefTitleFormatters": "Formatters",
   "prefDescFormatters": "The formatter of each language where plugins offer several, by its id or its plugin's name.",
   "themeAboutPlugin": "From the plugin {plugin}",
+  "fileIconThemeDefault": "Mayoi Icons",
+  "fileIconThemeMayoiAbout": "Mayoi's own icons",
+  "fileIconThemePlaceholder": "Search file icon themes",
+  "fileIconThemeNoMatches": "No file icon theme matches.",
+  "fileIconThemeFailed": "Could not read the file icon theme {id}. See Plugins → Show Plugin Log.",
   "cmdSelInsertSnippet": "Insert Snippet…",
   "snippetsNone": "No plugin has snippets for {language}",
   "snippetsPlaceholder": "Insert a snippet",

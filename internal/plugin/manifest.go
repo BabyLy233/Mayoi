@@ -51,6 +51,7 @@ type Contributes struct {
 	Views           []ViewContrib             `json:"views,omitempty"`
 	Previews        []PreviewContrib          `json:"previews,omitempty"`
 	Themes          []ThemeContrib            `json:"themes,omitempty"`
+	FileIconThemes  []FileIconThemeContrib    `json:"fileIconThemes,omitempty"`
 	Languages       []LanguageContrib         `json:"languages,omitempty"`
 	Snippets        []SnippetContrib          `json:"snippets,omitempty"`
 	Formatters      []FormatterContrib        `json:"formatters,omitempty"`
@@ -168,6 +169,14 @@ type ThemeContrib struct {
 	Path  string `json:"path"`
 	// Dark tells a theme for dark windows; a theme file may say too.
 	Dark bool `json:"dark,omitempty"`
+}
+
+// FileIconThemeContrib is a theme of file icons, in VS Code's file icon
+// theme format, in the plugin's folder.
+type FileIconThemeContrib struct {
+	ID    string `json:"id"`
+	Label string `json:"label"`
+	Path  string `json:"path"`
 }
 
 // LanguageContrib tells Mayoi of a language: its files, how its comments
@@ -400,6 +409,25 @@ func (m *Manifest) check() error {
 	for _, t := range c.Themes {
 		if err := own("theme", t.ID); err != nil {
 			return err
+		}
+	}
+	iconThemes := map[string]bool{}
+	for _, t := range c.FileIconThemes {
+		if err := own("file icon theme", t.ID); err != nil {
+			return err
+		}
+		if iconThemes[t.ID] {
+			return fmt.Errorf("file icon theme %q is declared twice", t.ID)
+		}
+		iconThemes[t.ID] = true
+		if t.Label == "" {
+			return fmt.Errorf("file icon theme %q has no label", t.ID)
+		}
+		if t.Path == "" {
+			return fmt.Errorf("file icon theme %q has no path", t.ID)
+		}
+		if filepath.IsAbs(t.Path) || strings.HasPrefix(filepath.Clean(t.Path), "..") {
+			return fmt.Errorf("file icon theme %q: path %q must be inside the plugin's folder", t.ID, t.Path)
 		}
 	}
 	for _, s := range c.LanguageServers {

@@ -102,6 +102,33 @@ func (w *prefsWindow) themeTiles(c *ui.Context, chosen string, apply func(any)) 
 	}
 }
 
+// fileIconThemeChoice chooses the file icon theme from Mayoi's icons and
+// those of the plugins that are on.
+func (w *prefsWindow) fileIconThemeChoice(c *ui.Context, chosen string, apply func(any)) {
+	choices := allFileIconThemes()
+	labels := make([]string, len(choices))
+	sel := 0
+	for i, ch := range choices {
+		labels[i] = ch.name
+		if ch.id == chosen {
+			sel = i
+		}
+	}
+	current := labels[sel]
+	if choices[sel].id != chosen {
+		current = chosen
+	}
+	s := w.first(ui.Select(c.Key("prefs-file-icon-theme"), &current, labels).Label(prefTitle("fileIconTheme")).MinWidth(180))
+	if s.Changed() {
+		for i, label := range labels {
+			if label == current {
+				apply(choices[i].id)
+				return
+			}
+		}
+	}
+}
+
 // toggle is a switch of the window, as the theme's but that answers the
 // pointer: its track darkens under it, and its knob stretches toward
 // where it goes while held, as UISwitch's does. The knob slides, and the

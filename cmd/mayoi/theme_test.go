@@ -54,7 +54,7 @@ func TestMatrixTheme(t *testing.T) {
 		t.Error("comments are not in the steel of the chrome")
 	}
 	// The icons of files are greens, not their languages' colors.
-	if _, c := fileIcon(a.pal, "main.go"); c != langColor(matrixPal, "#00add8", "") || c.G < c.R || c.G < c.B {
+	if _, c := builtinFileIcon(a.pal, "main.go"); c != langColor(matrixPal, "#00add8", "") || c.G < c.R || c.G < c.B {
 		t.Errorf("a Go file's icon is %v, not a green", c)
 	}
 	a.setTheme("")
@@ -238,7 +238,7 @@ func TestLightOrDarkThemes(t *testing.T) {
 			}
 			// The icons of files keep their languages' colors, but in
 			// Claude, which shades its icons.
-			if _, c := fileIcon(a.pal, "main.go"); (c == langColor(&palette{mono: true, muted: a.pal.muted, accent: a.pal.accent}, "#00add8", "")) != a.pal.mono {
+			if _, c := builtinFileIcon(a.pal, "main.go"); (c == langColor(&palette{mono: true, muted: a.pal.muted, accent: a.pal.accent}, "#00add8", "")) != a.pal.mono {
 				t.Errorf("a Go file's icon under %s is %v", tc.name, c)
 			}
 			// Choosing an appearance keeps the theme.

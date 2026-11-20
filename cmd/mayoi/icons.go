@@ -134,8 +134,9 @@ var (
 	iconQuote         = lucide(`<path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/>`)
 )
 
-// fileIcon returns the icon of a file and its color, by its name.
-func fileIcon(p *palette, name string) (*ui.SVG, ui.Color) {
+// builtinFileIcon returns the icon of a file and its color, by its name,
+// before a plugin's file icon theme has a say.
+func builtinFileIcon(p *palette, name string) (*ui.SVG, ui.Color) {
 	lower := strings.ToLower(name)
 	ext := strings.TrimPrefix(filepath.Ext(lower), ".")
 	switch lower {

@@ -246,6 +246,9 @@ type Prefs struct {
 	// "grokbot" for Grok Bot or "cursor" for Cursor, light or dark as
 	// Appearance is, or "" for Mayoi's own.
 	Theme string `json:"theme,omitempty"`
+	// FileIconTheme is the file icon theme, by the id of a plugin's
+	// contribution, or "" for Mayoi's icons.
+	FileIconTheme string `json:"fileIconTheme,omitempty"`
 	// SidebarRight puts the sidebar right of the editors, rather than left.
 	SidebarRight bool `json:"sidebarRight,omitempty"`
 	// ExplorerCompactFolders shows a chain of single-child folders on one

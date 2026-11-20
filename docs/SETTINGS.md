@@ -70,6 +70,7 @@ takes its default.
 | `terminalFontSize`      | `0`           | 0, or 9 to 28                                               |                                                |
 | `terminalCopyOnSelect`  | `true`        | `true`, `false`                                             |                                                |
 | `theme`                 | `""`          | `""` (Mayoi), `"matrix"`, `"claude"`, `"qoder"`, `"grokbot"`, `"cursor"`, `"purplegold"`, `"pumpkin"`, `"witchsbrew"`, `"bloodmoon"`, `"gtavi"` | **View → Theme**, **Color Theme…**             |
+| `fileIconTheme`         | `""`          | `""` (Mayoi's icons), or a plugin's theme id as `"material.icons"` | **View → Theme → File Icon Theme…**            |
 | `appearance`            | `""`          | `""` (follow the system), `"light"`, `"dark"`               | **View → Theme**                               |
 | `sidebarRight`          | `false`       | `true`, `false`                                             | **View → Sidebar on Right**                    |
 | `panelPosition`         | `""`          | `""` (bottom), `"left"`, `"right"`                          | **View → Panel Position**                      |
@@ -168,6 +169,9 @@ differ in width lines them up only roughly.
 - **`theme`** is Mayoi's own theme, The Matrix, Claude, Qoder, Grok Bot, Cursor, Purple Gold, a Halloween theme:
   `"pumpkin"` for Jack-o'-Lantern, `"witchsbrew"` for Witch's Brew and `"bloodmoon"` for Blood Moon, or `"gtavi"` for
   GTA VI. The Matrix, Purple Gold, the Halloween themes and GTA VI are always dark, so they ignore `appearance`.
+- **`fileIconTheme`** names a file icon theme a plugin contributes, as `"material.icons"`, for the Explorer, tabs,
+  Quick Open, search, Source Control and breadcrumbs. `""` keeps Mayoi's icons, as does a theme whose plugin is off or
+  gone.
 - **`panelPosition`** is where the terminal panel is: `""` or `"bottom"` below the editors, `"left"` or `"right"` at a
   side of the window. At a side it sits past the sidebar, so with the sidebar on the same side the panel is the outer
   of the two.
